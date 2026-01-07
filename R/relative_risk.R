@@ -12,7 +12,7 @@
 #' binom_exact_ci(15,80, accuracy=0.01)
 riskscoreci <- function(x1,n1,x2,n2,conflev)
 {
-  z =  abs(qnorm((1-conflev)/2))
+  z =  abs(stats::qnorm((1-conflev)/2))
   if ((x2==0) &&(x1==0)){
     ul = Inf
     ll = 0
@@ -119,36 +119,42 @@ riskscoreci <- function(x1,n1,x2,n2,conflev)
 
 #' Calculate upper bound of risk ratio score CI
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param x1 Scalar number exposed with outcome
+#' @param n1 Scalar number exposed
+#' @param x2 Scalar number unexposed with outcome
+#' @param n2 Scalar number unexposed
 #'
 #' @return A numerical vector.
 #' @export
 #'
 #' @examples
-#' rr_score_upper(15,80)
+#' rr_score_upper(15,80,30,160)
 rr_score_upper <- function(x1, n1, x2, n2) {
   return(mapply(function(x1, n1, x2, n2) riskscoreci(x1,n1,x2,n2, conflev=0.95)[3], x1, n1, x2, n2))
 }
 
 #' Calculate lower bound of risk ratio score CI
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param x1 Scalar number exposed with outcome
+#' @param n1 Scalar number exposed
+#' @param x2 Scalar number unexposed with outcome
+#' @param n2 Scalar number unexposed
 #'
 #' @return A numerical vector.
 #' @export
 #'
 #' @examples
-#' rr_score_lower(15,80)
+#' rr_score_lower(15,80,30,160)
 rr_score_lower <- function(x1, n1, x2, n2) {
   return(mapply(function(x1, n1, x2, n2) riskscoreci(x1,n1,x2,n2, conflev=0.95)[1], x1, n1, x2, n2))
 }
 
-#' Calculate string confidence interval for binom exact CI
+#' Calculate string confidence interval for risk ratio score CI
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param x1 Scalar number exposed with outcome
+#' @param n1 Scalar number exposed
+#' @param x2 Scalar number unexposed with outcome
+#' @param n2 Scalar number unexposed
 #' @param accuracy Accuracy of rounding
 #' @param ci_only Boolean of whether to report CI only without mean
 #'
@@ -170,4 +176,20 @@ rr_score_ci <- function(x1,n1, x2, n2, accuracy=0.01, ci_only=FALSE) {
                         scales::number(estimated_ub, accuracy=accuracy),")")
   }
   return(ci_string)
+}
+
+#' Calculate variance of log risk ratio (following Jewell 2003)
+#' @param x1 number of cases in group 1
+#' @param n1 number in group 1
+#' @param x2 number of cases in group 2
+#' @param n2 number in group 2
+#'
+#' @return A numerical output of estimated variance
+#' @export
+#'
+#' @examples
+#' calculate_fe_pooled_rr(38,398,37,514,29,314,18,215)
+var_log_rr <- function(x1, n1, x2, n2) {
+  varest <-((n1-x1)/(x1*n1)) + ((n2-x2)/(x2*n2))
+  return(varest)
 }

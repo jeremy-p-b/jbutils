@@ -7,9 +7,9 @@
 wilson_lower(num, denom)
 }
 \arguments{
-\item{num}{Vector number of events.}
+\item{num}{Scalar number of events.}
 
-\item{denom}{Vector size of population.}
+\item{denom}{Scalar size of population.}
 }
 \value{
 A numerical vector.

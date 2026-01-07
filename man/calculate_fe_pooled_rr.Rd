@@ -32,9 +32,11 @@ calculate_fe_pooled_rr(
 \item{s2x2}{number of unexposed cases in study 2}
 
 \item{s2n2}{number unexposed in study 2}
+
+\item{pretty}{logical indicator of whether to output a formatted string or numerical vector (default=TRUE)}
 }
 \value{
-A numerical vector with estimate, lower bound, and upper bound
+A numerical vector with estimate, lower bound, and upper bound or a character representation of the vector
 }
 \description{
 Calculate fixed effects pooled risk ratio (following Borenstein 2009)

@@ -7,9 +7,9 @@
 wilson_ci(num, denom, accuracy = 0.1, ci_only = FALSE, per = 1)
 }
 \arguments{
-\item{num}{Vector number of events.}
+\item{num}{Scalar number of events.}
 
-\item{denom}{Vector size of population.}
+\item{denom}{Scalar size of population.}
 
 \item{accuracy}{Accuracy of rounding}
 

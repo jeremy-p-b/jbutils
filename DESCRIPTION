@@ -12,8 +12,11 @@ RoxygenNote: 7.3.2
 Imports: 
     dplyr,
     epitools,
+    glue,
     magrittr,
+    openxlsx,
     scales,
+    stats,
     tidyr
 Suggests: 
     testthat (>= 3.0.0)

@@ -1,7 +1,7 @@
 #' Calculate lower bound of Wilson CI for binomial proportion
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param num Scalar number of events.
+#' @param denom Scalar size of population.
 #'
 #' @return A numerical vector.
 #' @export
@@ -9,14 +9,14 @@
 #' @examples
 #' wilson_lower(15,80)
 wilson_lower <- function(num, denom) {
-  return(mapply(function(num, denom) epitools::binom.wilson(num, denom)[1,"lower"], as.numeric(num), as.numeric(denom)))
+  return(mapply(function(num, denom) epitools::binom.wilson(num, denom)["lower"][1,1], num, denom))
 }
 
 
 #' Calculate upper bound of Wilson CI for binomial proportion
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param num Scalar number of events.
+#' @param denom Scalar size of population.
 #'
 #' @return A numerical vector.
 #' @export
@@ -24,13 +24,13 @@ wilson_lower <- function(num, denom) {
 #' @examples
 #' wilson_upper(15,80)
 wilson_upper <- function(num, denom) {
-  return(mapply(function(num, denom) epitools::binom.wilson(num, denom)["upper"][1,1], as.numeric(num), as.numeric(denom)))
+  return(mapply(function(num, denom) epitools::binom.wilson(num, denom)["upper"][1,1], num, denom))
 }
 
 #' Calculate string confidence interval for wilson CI
 #'
-#' @param num Vector number of events.
-#' @param denom Vector size of population.
+#' @param num Scalar number of events.
+#' @param denom Scalar size of population.
 #' @param accuracy Accuracy of rounding
 #' @param ci_only Boolean of whether to report CI only without mean
 #' @param per counts per x
@@ -54,7 +54,3 @@ wilson_ci <- function(num, denom, accuracy=0.1, ci_only=FALSE, per=1) {
   }
   return(ci_string)
 }
-
-
-
-
