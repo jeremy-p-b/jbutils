@@ -82,7 +82,6 @@ writeDescriptiveDataTableAuto <- function(..., description) {
   openxlsx::setColWidths(params[[1]], params$sheet, 1:ncol(params$x), widths=widths)
 }
 
-
 #' Write formatted DataTable
 #'
 #' @param ... Arguments to WriteDataTable function
@@ -97,4 +96,26 @@ writeDataTableAuto <- function(...) {
   openxlsx::writeDataTable(..., tableStyle = "TableStyleLight9")
   params <- list(...)
   openxlsx::setColWidths(params[[1]], params$sheet, 1:ncol(params$x), widths="auto")
+}
+
+
+#'  Convert vector to logical if a binary number (useful for preparing for tbl_summary)
+#'
+#' @param x A vector
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' convert_numeric_to_binary(c(1,2,3))
+#' }
+convert_numeric_to_binary <- function(x) {
+  if (inherits(x, c("integer", "numeric")) &&
+      all(unique(stats::na.omit(x)) %in% c(0, 1))) {
+    y <- as.logical(x)
+  } else {
+    y <- x
+  }
+  Hmisc::label(y) <- Hmisc::label(x)
+  return(y)
 }

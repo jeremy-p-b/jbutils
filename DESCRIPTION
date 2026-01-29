@@ -13,6 +13,7 @@ Imports:
     dplyr,
     epitools,
     glue,
+    Hmisc,
     magrittr,
     openxlsx,
     scales,
