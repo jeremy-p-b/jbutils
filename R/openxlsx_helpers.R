@@ -119,3 +119,21 @@ convert_numeric_to_binary <- function(x) {
   Hmisc::label(y) <- Hmisc::label(x)
   return(y)
 }
+
+
+#' Create a pretty formatted tibble from a gtsummary object
+#'
+#' @param summary_obj gtsummary object
+#'
+#' @return A tibble
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' pretty_tibble(mysummary_table)
+#' }
+as_pretty_tibble <- function(summary_obj) {
+  summary_tibble <- summary_obj %>% tibble::as_tibble() %>%
+    dplyr::rename_with(~ stringr::str_replace_all(.x, "\\*", ""))
+  return(summary_tibble)
+}
